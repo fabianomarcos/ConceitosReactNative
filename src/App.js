@@ -18,7 +18,6 @@ export default function App() {
   useEffect(() => {
     api.get('repositories').then(response => {
       setRepositories(response.data);
-      console.log(response.data);
     })
   }, [])
 
@@ -26,7 +25,6 @@ export default function App() {
     const response = await api.post(`repositories/${id}/like`);
 
     const likedRepository = response.data;
-    console.log(response.data);
 
     const repositoriesUpdated = repositories.map(repository => {
       if (repository.id === id) {
@@ -51,7 +49,7 @@ export default function App() {
               <Text style={styles.repository}>{repository.title}</Text>
 
               <View style={styles.techsContainer}>
-                {repositories.techs.map(tech => (
+                {repository.techs.map(tech => (
                   <Text key={tech} style={styles.tech}>
                     {tech}
                   </Text>
